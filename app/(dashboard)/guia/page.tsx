@@ -1,0 +1,76 @@
+const SECTIONS = [
+  {
+    title: "Hoy",
+    body: "Tu resumen diario. Aquí aparecen los contactos a los que tienes que escribir hoy: un seguimiento pendiente, una recompra a punto de caducar o una cita en la agenda. Es la pantalla con la que empezar cada día.",
+  },
+  {
+    title: "Contactos",
+    body: "Tu lista de clientes y prospectos. Cada contacto tiene un estado — caliente, tibio o frío — para que sepas a quién priorizar, y un histórico de ventas con la fecha de recompra estimada según el producto que le vendiste.",
+  },
+  {
+    title: "Productos",
+    body: "Tu catálogo de productos FitLine, con la duración media de cada uno (por ejemplo, un bote que dura ~30 días). La app usa ese dato para calcular automáticamente cuándo le tocará recomprar a cada cliente y avisarte.",
+  },
+  {
+    title: "Equipo",
+    body: "Seguimiento de las personas de tu equipo (tu downline). Marca quién está activo o inactivo para detectar pronto a quien necesita apoyo o un empujón de motivación.",
+  },
+  {
+    title: "Agenda",
+    body: "Tus citas y eventos: llamadas, presentaciones, reuniones de equipo. Lo que anotes aquí también aparece en tu resumen de Hoy cuando toca.",
+  },
+  {
+    title: "Plantillas",
+    body: "Mensajes ya escritos que puedes reutilizar y personalizar — para el primer contacto, el seguimiento, el aviso de recompra, etc. Ahorra tiempo y evita el 'no sé qué escribirle'.",
+  },
+  {
+    title: "Rango",
+    body: "Calculadora de tu volumen personal y de grupo. Introduce tus cifras del mes y comprueba en qué rango estás y qué te falta para el siguiente.",
+  },
+  {
+    title: "Métricas",
+    body: "Un panel con tus números: contactos, ventas, recompras, equipo. Para ver de un vistazo cómo va tu negocio sin tener que sumarlo a mano.",
+  },
+  {
+    title: "Recordatorios (notificaciones)",
+    body: "Si activas las notificaciones (te lo pedirá la app), te avisamos en el móvil cuando algo necesite tu atención — un seguimiento, una recompra — aunque no tengas la app abierta.",
+  },
+  {
+    title: "Ajustes",
+    body: "Tu cuenta, la suscripción, la política de privacidad y la opción de eliminar tu cuenta y todos tus datos cuando quieras.",
+  },
+];
+
+export default function GuiaPage() {
+  return (
+    <div className="mx-auto w-full max-w-md flex-1 space-y-6">
+      <div className="space-y-1">
+        <h1 className="text-lg font-semibold">Guía rápida</h1>
+        <p className="text-sm text-muted-foreground">
+          Qué hace cada sección de PM App y para qué sirve.
+        </p>
+      </div>
+
+      <div className="space-y-2">
+        {SECTIONS.map((section) => (
+          <details
+            key={section.title}
+            className="group rounded-2xl border p-4 open:pb-4"
+          >
+            <summary className="cursor-pointer list-none text-sm font-semibold marker:content-none">
+              <span className="flex items-center justify-between">
+                {section.title}
+                <span className="text-muted-foreground transition-transform group-open:rotate-180">
+                  ⌄
+                </span>
+              </span>
+            </summary>
+            <p className="mt-2 text-sm text-muted-foreground">
+              {section.body}
+            </p>
+          </details>
+        ))}
+      </div>
+    </div>
+  );
+}

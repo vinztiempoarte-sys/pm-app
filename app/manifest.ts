@@ -1,0 +1,26 @@
+import type { MetadataRoute } from 'next'
+
+export default function manifest(): MetadataRoute.Manifest {
+  return {
+    name: 'PM App — Gestión para distribuidores',
+    short_name: 'PM App',
+    description:
+      'Seguimiento de clientes, recompras, equipo y agenda para distribuidores independientes.',
+    start_url: '/',
+    display: 'standalone',
+    background_color: '#F4F1EA',
+    theme_color: '#1F4E45',
+    icons: [
+      {
+        src: '/icons/icon-192.png',
+        sizes: '192x192',
+        type: 'image/png',
+      },
+      {
+        src: '/icons/icon-512.png',
+        sizes: '512x512',
+        type: 'image/png',
+      },
+    ],
+  }
+}
