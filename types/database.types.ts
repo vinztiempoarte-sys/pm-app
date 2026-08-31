@@ -129,6 +129,20 @@ export type Profile = {
   current_personal_volume: number | null;
   current_group_volume: number | null;
   subscription_status: string;
+  mini_landing_slug: string | null;
+  mini_landing_bio: string | null;
+  brand_color: string | null;
+  brand_logo_url: string | null;
+  created_at: string;
+};
+
+export type MiniLandingLink = {
+  id: string;
+  profile_id: string;
+  label: string;
+  url: string;
+  position: number;
+  click_count: number;
   created_at: string;
 };
 

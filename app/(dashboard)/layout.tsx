@@ -52,6 +52,9 @@ export default async function DashboardLayout({
             <Link href="/metricas" className="hover:text-foreground">
               Métricas
             </Link>
+            <Link href="/mi-pagina" className="hover:text-foreground">
+              Mi página
+            </Link>
             <Link href="/guia" className="hover:text-foreground">
               Guía
             </Link>
