@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -36,6 +36,11 @@ export function MiPaginaForm({ profile }: { profile: Profile | null }) {
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [host, setHost] = useState("");
+
+  useEffect(() => {
+    setHost(window.location.host);
+  }, []);
 
   const {
     register,
@@ -91,7 +96,7 @@ export function MiPaginaForm({ profile }: { profile: Profile | null }) {
       <div className="space-y-1.5">
         <Label htmlFor="mini_landing_slug">Tu enlace</Label>
         <div className="flex items-center gap-1 text-sm text-muted-foreground">
-          <span className="shrink-0">pmapp-crm.vercel.app/l/</span>
+          <span className="shrink-0">{host}/l/</span>
           <Input
             id="mini_landing_slug"
             placeholder="tu-nombre"
