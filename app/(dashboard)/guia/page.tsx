@@ -32,6 +32,10 @@ const SECTIONS = [
     body: "Un panel con tus números: contactos, ventas, recompras, equipo. Para ver de un vistazo cómo va tu negocio sin tener que sumarlo a mano.",
   },
   {
+    title: "Mi página",
+    body: "Tu tarjeta digital pública — sustituye a un Linktree genérico. Es una página con tu foto, una frase de presentación, un vídeo opcional y botones a tus canales (WhatsApp, Instagram, catálogo...), todo con tu propia marca. Compártela como enlace único en tus redes o cuando alguien te pregunte por los productos. Cada clic en un enlace queda contado, para que sepas qué canal funciona mejor.",
+  },
+  {
     title: "Recordatorios (notificaciones)",
     body: "Si activas las notificaciones (te lo pedirá la app), te avisamos en el móvil cuando algo necesite tu atención — un seguimiento, una recompra — aunque no tengas la app abierta.",
   },
