@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { getYoutubeEmbedUrl } from "@/lib/youtube";
+import { LeadForm } from "@/components/mini-landing/LeadForm";
 
 type LandingData = {
   full_name: string | null;
@@ -88,6 +89,8 @@ export default async function MiniLandingPage({
           </p>
         )}
       </div>
+
+      <LeadForm slug={slug} accent={accent} />
     </div>
   );
 }

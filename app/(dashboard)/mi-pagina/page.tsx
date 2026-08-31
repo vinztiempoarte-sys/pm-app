@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { MiPaginaForm } from "@/components/mini-landing/MiPaginaForm";
 import { LinksManager } from "@/components/mini-landing/LinksManager";
+import { QrCode } from "@/components/mini-landing/QrCode";
 import type { MiniLandingLink, Profile } from "@/types/database.types";
 
 export default async function MiPaginaPage() {
@@ -12,7 +13,7 @@ export default async function MiPaginaPage() {
   const { data: profile } = await supabase
     .from("profiles")
     .select(
-      "id, full_name, mini_landing_slug, mini_landing_bio, brand_color, brand_logo_url"
+      "id, full_name, mini_landing_slug, mini_landing_bio, brand_color, brand_logo_url, mini_landing_video_url"
     )
     .eq("id", user!.id)
     .single();
@@ -34,6 +35,8 @@ export default async function MiPaginaPage() {
       </div>
 
       <MiPaginaForm profile={profile as Profile} />
+
+      {profile?.mini_landing_slug && <QrCode slug={profile.mini_landing_slug} />}
 
       <LinksManager
         profileId={user!.id}

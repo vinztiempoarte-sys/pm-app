@@ -33,7 +33,7 @@ const SECTIONS = [
   },
   {
     title: "Mi página",
-    body: "Tu tarjeta digital pública — sustituye a un Linktree genérico. Es una página con tu foto, una frase de presentación, un vídeo opcional y botones a tus canales (WhatsApp, Instagram, catálogo...), todo con tu propia marca. Compártela como enlace único en tus redes o cuando alguien te pregunte por los productos. Cada clic en un enlace queda contado, para que sepas qué canal funciona mejor.",
+    body: "Tu tarjeta digital pública — sustituye a un Linktree genérico. Es una página con tu foto, una frase de presentación, un vídeo opcional y botones a tus canales (WhatsApp, Instagram, catálogo...), todo con tu propia marca. Compártela como enlace único en tus redes, o con el código QR descargable, listo para tarjetas o eventos presenciales. Además tiene un formulario de contacto: cuando alguien lo rellena, se crea automáticamente como nuevo prospecto en tu lista de Contactos, sin que tengas que hacer nada. Cada clic en un enlace queda contado, para que sepas qué canal funciona mejor.",
   },
   {
     title: "Recordatorios (notificaciones)",
