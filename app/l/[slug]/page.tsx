@@ -1,10 +1,12 @@
 import { notFound } from "next/navigation";
+import { getYoutubeEmbedUrl } from "@/lib/youtube";
 
 type LandingData = {
   full_name: string | null;
   bio: string | null;
   brand_color: string | null;
   brand_logo_url: string | null;
+  video_url: string | null;
   links: { id: string; label: string; url: string }[];
 };
 
@@ -30,6 +32,7 @@ export default async function MiniLandingPage({
   }
 
   const accent = data.brand_color || "oklch(0.537 0.19 18.6)";
+  const embedUrl = data.video_url ? getYoutubeEmbedUrl(data.video_url) : null;
 
   return (
     <div className="mx-auto flex min-h-full w-full max-w-sm flex-col items-center gap-6 px-4 py-12">
@@ -55,6 +58,18 @@ export default async function MiniLandingPage({
           <p className="text-sm text-muted-foreground">{data.bio}</p>
         )}
       </div>
+
+      {embedUrl && (
+        <div className="aspect-video w-full overflow-hidden rounded-2xl">
+          <iframe
+            src={embedUrl}
+            title="Vídeo de presentación"
+            className="h-full w-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+      )}
 
       <div className="flex w-full flex-col gap-3">
         {data.links.map((link) => (

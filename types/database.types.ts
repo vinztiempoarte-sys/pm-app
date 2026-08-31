@@ -133,6 +133,7 @@ export type Profile = {
   mini_landing_bio: string | null;
   brand_color: string | null;
   brand_logo_url: string | null;
+  mini_landing_video_url: string | null;
   created_at: string;
 };
 

@@ -31,7 +31,9 @@ Deno.serve(async (req) => {
 
   const { data: profile } = await adminClient
     .from("profiles")
-    .select("id, full_name, mini_landing_bio, brand_color, brand_logo_url")
+    .select(
+      "id, full_name, mini_landing_bio, brand_color, brand_logo_url, mini_landing_video_url"
+    )
     .eq("mini_landing_slug", slug)
     .maybeSingle();
 
@@ -54,6 +56,7 @@ Deno.serve(async (req) => {
       bio: profile.mini_landing_bio,
       brand_color: profile.brand_color,
       brand_logo_url: profile.brand_logo_url,
+      video_url: profile.mini_landing_video_url,
       links: links ?? [],
     }),
     { headers: { ...corsHeaders, "Content-Type": "application/json" } }

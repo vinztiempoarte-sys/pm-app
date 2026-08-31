@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { getYoutubeEmbedUrl } from "@/lib/youtube";
 import type { Profile } from "@/types/database.types";
 
 const schema = z.object({
@@ -20,6 +21,11 @@ const schema = z.object({
   mini_landing_bio: z.string().max(160, "Máximo 160 caracteres").optional(),
   brand_color: z.string().optional(),
   brand_logo_url: z.string().url("URL no válida").optional().or(z.literal("")),
+  mini_landing_video_url: z
+    .string()
+    .refine((v) => !v || !!getYoutubeEmbedUrl(v), "Tiene que ser un enlace de YouTube")
+    .optional()
+    .or(z.literal("")),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -42,6 +48,7 @@ export function MiPaginaForm({ profile }: { profile: Profile | null }) {
       mini_landing_bio: profile?.mini_landing_bio ?? "",
       brand_color: profile?.brand_color ?? "#dc2669",
       brand_logo_url: profile?.brand_logo_url ?? "",
+      mini_landing_video_url: profile?.mini_landing_video_url ?? "",
     },
   });
 
@@ -57,6 +64,7 @@ export function MiPaginaForm({ profile }: { profile: Profile | null }) {
         mini_landing_bio: values.mini_landing_bio || null,
         brand_color: values.brand_color || null,
         brand_logo_url: values.brand_logo_url || null,
+        mini_landing_video_url: values.mini_landing_video_url || null,
       })
       .eq("id", profile!.id);
 
@@ -130,6 +138,20 @@ export function MiPaginaForm({ profile }: { profile: Profile | null }) {
             </p>
           )}
         </div>
+      </div>
+
+      <div className="space-y-1.5">
+        <Label htmlFor="mini_landing_video_url">Vídeo de presentación (YouTube)</Label>
+        <Input
+          id="mini_landing_video_url"
+          placeholder="https://youtu.be/..."
+          {...register("mini_landing_video_url")}
+        />
+        {errors.mini_landing_video_url && (
+          <p className="text-sm text-destructive">
+            {errors.mini_landing_video_url.message}
+          </p>
+        )}
       </div>
 
       {error && <p className="text-sm text-destructive">{error}</p>}
