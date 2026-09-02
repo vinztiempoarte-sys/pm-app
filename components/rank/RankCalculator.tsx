@@ -132,11 +132,30 @@ export function RankCalculator({
           <p className="text-xs text-muted-foreground">Tu rango actual</p>
           <p className="text-2xl font-semibold">{currentRank?.name ?? "Ninguno todavía"}</p>
           {nextRank && (
-            <p className="mt-2 text-xs text-muted-foreground">
-              Para <span className="font-medium">{nextRank.name}</span> te faltan{" "}
-              {Math.max(0, nextRank.min_personal_volume - pv)} VP y{" "}
-              {Math.max(0, nextRank.min_group_volume - gv)} VG
-            </p>
+            <>
+              <p className="mt-2 text-xs text-muted-foreground">
+                Para <span className="font-medium">{nextRank.name}</span> te faltan{" "}
+                {Math.max(0, nextRank.min_personal_volume - pv)} VP y{" "}
+                {Math.max(0, nextRank.min_group_volume - gv)} VG
+              </p>
+              <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-muted">
+                <div
+                  className="h-full rounded-full bg-primary transition-all"
+                  style={{
+                    width: `${Math.min(
+                      100,
+                      Math.max(
+                        0,
+                        Math.min(
+                          nextRank.min_personal_volume > 0 ? (pv / nextRank.min_personal_volume) * 100 : 100,
+                          nextRank.min_group_volume > 0 ? (gv / nextRank.min_group_volume) * 100 : 100
+                        )
+                      )
+                    )}%`,
+                  }}
+                />
+              </div>
+            </>
           )}
         </section>
       )}

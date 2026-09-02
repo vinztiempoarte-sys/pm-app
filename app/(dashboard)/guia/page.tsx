@@ -44,6 +44,10 @@ const SECTIONS = [
     body: "Elige el tipo de contenido (carrusel de Instagram, guion de TikTok Live, o ideas para la semana), pon un tema si quieres uno concreto, y genera una propuesta lista para adaptar a tu estilo. Sigue siempre las mismas reglas de compliance que el revisor, así que no debería proponerte nada problemático — pero revísalo igualmente antes de publicar.",
   },
   {
+    title: "Logros",
+    body: "Tu racha de días seguidos haciendo seguimiento (cada vez que marcas una acción como hecha en 'Hoy' cuenta para la racha), y las insignias que vas desbloqueando por hitos: tus primeros contactos, tus primeras ventas, hacer crecer tu equipo. También añadimos una barra de progreso visual en Rango, para ver de un vistazo qué tan cerca estás del siguiente nivel.",
+  },
+  {
     title: "Recordatorios (notificaciones)",
     body: "Si activas las notificaciones (te lo pedirá la app), te avisamos en el móvil cuando algo necesite tu atención — un seguimiento, una recompra — aunque no tengas la app abierta.",
   },

@@ -61,6 +61,9 @@ export default async function DashboardLayout({
             <Link href="/generador" className="hover:text-foreground">
               Generador
             </Link>
+            <Link href="/logros" className="hover:text-foreground">
+              Logros
+            </Link>
             <Link href="/guia" className="hover:text-foreground">
               Guía
             </Link>
