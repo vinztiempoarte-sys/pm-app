@@ -36,6 +36,10 @@ const SECTIONS = [
     body: "Tu tarjeta digital pública — sustituye a un Linktree genérico. Es una página con tu foto, una frase de presentación, un vídeo opcional y botones a tus canales (WhatsApp, Instagram, catálogo...), todo con tu propia marca. Compártela como enlace único en tus redes, o con el código QR descargable, listo para tarjetas o eventos presenciales. Además tiene un formulario de contacto: cuando alguien lo rellena, se crea automáticamente como nuevo prospecto en tu lista de Contactos, sin que tengas que hacer nada. Cada clic en un enlace queda contado, para que sepas qué canal funciona mejor.",
   },
   {
+    title: "Compliance",
+    body: "Pega aquí cualquier texto antes de publicarlo o enviarlo — un mensaje de WhatsApp, una publicación, un guion. Una IA revisa si tiene afirmaciones de salud que PM International o la normativa no permiten (como decir que un producto cura una enfermedad concreta) y te propone una versión segura, manteniendo tu tono. Úsalo siempre que tengas dudas antes de publicar algo sobre los productos.",
+  },
+  {
     title: "Recordatorios (notificaciones)",
     body: "Si activas las notificaciones (te lo pedirá la app), te avisamos en el móvil cuando algo necesite tu atención — un seguimiento, una recompra — aunque no tengas la app abierta.",
   },
