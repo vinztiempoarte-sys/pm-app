@@ -40,6 +40,10 @@ const SECTIONS = [
     body: "Pega aquí cualquier texto antes de publicarlo o enviarlo — un mensaje de WhatsApp, una publicación, un guion. Una IA revisa si tiene afirmaciones de salud que PM International o la normativa no permiten (como decir que un producto cura una enfermedad concreta) y te propone una versión segura, manteniendo tu tono. Úsalo siempre que tengas dudas antes de publicar algo sobre los productos.",
   },
   {
+    title: "Generador",
+    body: "Elige el tipo de contenido (carrusel de Instagram, guion de TikTok Live, o ideas para la semana), pon un tema si quieres uno concreto, y genera una propuesta lista para adaptar a tu estilo. Sigue siempre las mismas reglas de compliance que el revisor, así que no debería proponerte nada problemático — pero revísalo igualmente antes de publicar.",
+  },
+  {
     title: "Recordatorios (notificaciones)",
     body: "Si activas las notificaciones (te lo pedirá la app), te avisamos en el móvil cuando algo necesite tu atención — un seguimiento, una recompra — aunque no tengas la app abierta.",
   },
