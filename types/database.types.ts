@@ -108,6 +108,15 @@ export type ChecklistItem = {
   created_at: string;
 };
 
+export type ChecklistTemplateItem = {
+  id: string;
+  owner_id: string;
+  title: string;
+  day_bucket: 30 | 60 | 90;
+  position: number;
+  created_at: string;
+};
+
 export type Rank = {
   id: string;
   owner_id: string;

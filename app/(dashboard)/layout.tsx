@@ -64,6 +64,9 @@ export default async function DashboardLayout({
             <Link href="/logros" className="hover:text-foreground">
               Logros
             </Link>
+            <Link href="/duplicacion" className="hover:text-foreground">
+              Duplicación
+            </Link>
             <Link href="/guia" className="hover:text-foreground">
               Guía
             </Link>

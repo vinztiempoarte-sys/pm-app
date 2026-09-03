@@ -48,6 +48,10 @@ const SECTIONS = [
     body: "Tu racha de días seguidos haciendo seguimiento (cada vez que marcas una acción como hecha en 'Hoy' cuenta para la racha), y las insignias que vas desbloqueando por hitos: tus primeros contactos, tus primeras ventas, hacer crecer tu equipo. También añadimos una barra de progreso visual en Rango, para ver de un vistazo qué tan cerca estás del siguiente nivel.",
   },
   {
+    title: "Duplicación",
+    body: "Aquí configuras la plantilla del checklist de onboarding de 30/60/90 días que se clona automáticamente cada vez que añades un contacto nuevo de tipo Equipo. Añade, borra o reordena los pasos a tu gusto — a partir de ese momento, cada nuevo miembro de tu equipo recibirá esa versión actualizada. Los checklists de miembros que ya tenías no cambian con esto.",
+  },
+  {
     title: "Recordatorios (notificaciones)",
     body: "Si activas las notificaciones (te lo pedirá la app), te avisamos en el móvil cuando algo necesite tu atención — un seguimiento, una recompra — aunque no tengas la app abierta.",
   },
