@@ -7,15 +7,15 @@ export default function PrivacyPage() {
     <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-10">
       <h1 className="mb-2 text-xl font-semibold">Política de Privacidad</h1>
       <p className="mb-8 text-sm text-muted-foreground">
-        Última actualización: [FECHA]
+        Última actualización: 3 de septiembre de 2026
       </p>
 
       <div className="space-y-6 text-sm leading-relaxed">
         <section>
           <h2 className="mb-2 font-semibold">1. Responsable del tratamiento</h2>
           <p>
-            <strong>[NOMBRE DEL TITULAR / RAZÓN SOCIAL]</strong>, con contacto en{" "}
-            <strong>[EMAIL DE CONTACTO]</strong>, es responsable del tratamiento
+            <strong>Vitiart</strong>, con contacto en{" "}
+            <strong>pmapp@nutriciondetransporte.com</strong>, es responsable del tratamiento
             de los datos de la cuenta que usas para acceder a PM App (tu email
             y los datos de tu perfil).
           </p>
@@ -90,7 +90,7 @@ export default function PrivacyPage() {
             momento directamente desde la app (Contactos, Ajustes). También
             tienes derecho a la portabilidad y a oponerte al tratamiento.
             Para ejercer cualquiera de estos derechos, escribe a{" "}
-            <strong>[EMAIL DE CONTACTO]</strong>.
+            <strong>pmapp@nutriciondetransporte.com</strong>.
           </p>
         </section>
 
