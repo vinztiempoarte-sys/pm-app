@@ -225,14 +225,22 @@ export default function LoginPage() {
                 value={passwordEmail}
                 onChange={(e) => setPasswordEmail(e.target.value)}
               />
-              <Input
-                type="password"
-                required
-                minLength={6}
-                placeholder="Contraseña"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div className="space-y-1">
+                <Input
+                  type="password"
+                  required
+                  minLength={8}
+                  placeholder="Contraseña"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                {passwordMode === "signup" && (
+                  <p className="text-xs text-muted-foreground">
+                    Mínimo 8 caracteres, con mayúsculas, minúsculas, números y
+                    un símbolo (ej. Segura#123).
+                  </p>
+                )}
+              </div>
               {error && <p className="text-sm text-destructive">{error}</p>}
               <Button type="submit" className="w-full" disabled={loading}>
                 {loading

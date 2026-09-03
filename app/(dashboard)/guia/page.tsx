@@ -1,5 +1,9 @@
 const SECTIONS = [
   {
+    title: "Entrar en la app",
+    body: "Puedes elegir cómo entrar: con Google (un clic, sin nada que recordar), con un código de 8 dígitos por email (sin contraseña), o con email y contraseña propia. Si eliges contraseña, tiene que tener al menos 8 caracteres con mayúsculas, minúsculas, números y un símbolo — y si la olvidas, puedes pedir un enlace para elegir una nueva desde la pantalla de entrada.",
+  },
+  {
     title: "Hoy",
     body: "Tu resumen diario. Aquí aparecen los contactos a los que tienes que escribir hoy: un seguimiento pendiente, una recompra a punto de caducar o una cita en la agenda. Es la pantalla con la que empezar cada día.",
   },

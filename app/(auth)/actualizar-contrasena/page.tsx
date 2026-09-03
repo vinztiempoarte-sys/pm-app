@@ -119,15 +119,21 @@ export default function ActualizarContrasenaPage() {
 
           {status === "valid" && !done && (
             <form onSubmit={onSubmit} className="space-y-4">
-              <Input
-                type="password"
-                required
-                autoFocus
-                minLength={6}
-                placeholder="Nueva contraseña"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div className="space-y-1">
+                <Input
+                  type="password"
+                  required
+                  autoFocus
+                  minLength={8}
+                  placeholder="Nueva contraseña"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <p className="text-xs text-muted-foreground">
+                  Mínimo 8 caracteres, con mayúsculas, minúsculas, números y
+                  un símbolo.
+                </p>
+              </div>
               {error && <p className="text-sm text-destructive">{error}</p>}
               <Button type="submit" className="w-full" disabled={loading}>
                 {loading ? "Guardando..." : "Guardar contraseña"}
