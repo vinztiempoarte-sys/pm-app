@@ -17,9 +17,17 @@ export default async function ContactsPage() {
     <div className="flex flex-1 flex-col gap-4">
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold">Contactos</h1>
-        <Link href="/contactos/nuevo" className={buttonVariants({ size: "sm" })}>
-          + Nuevo
-        </Link>
+        <div className="flex gap-2">
+          <Link
+            href="/contactos/importar"
+            className={buttonVariants({ size: "sm", variant: "outline" })}
+          >
+            Importar
+          </Link>
+          <Link href="/contactos/nuevo" className={buttonVariants({ size: "sm" })}>
+            + Nuevo
+          </Link>
+        </div>
       </div>
       <ContactList contacts={contacts} />
     </div>

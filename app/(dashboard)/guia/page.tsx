@@ -9,7 +9,7 @@ const SECTIONS = [
   },
   {
     title: "Contactos",
-    body: "Tu lista de clientes y prospectos. Cada contacto tiene un estado — caliente, tibio o frío — para que sepas a quién priorizar, y un histórico de ventas con la fecha de recompra estimada según el producto que le vendiste.",
+    body: "Tu lista de clientes y prospectos. Cada contacto tiene un estado — caliente, tibio o frío — para que sepas a quién priorizar, y un histórico de ventas con la fecha de recompra estimada según el producto que le vendiste. Si ya tienes tu lista en otro sitio (Excel, Notas del móvil...), usa el botón 'Importar' para pegarla de golpe en vez de crear cada contacto a mano — eliges primero si son Clientes, Prospectos o Equipo, y luego pegas una línea por persona.",
   },
   {
     title: "Productos",
