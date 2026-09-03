@@ -11,15 +11,25 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 
-type Stage = "email" | "code";
+type Method = "code" | "password";
+type CodeStage = "email" | "code";
+type PasswordMode = "signin" | "signup";
 
 export default function LoginPage() {
   const router = useRouter();
   const supabase = createClient();
 
-  const [stage, setStage] = useState<Stage>("email");
+  const [method, setMethod] = useState<Method>("code");
+
+  const [codeStage, setCodeStage] = useState<CodeStage>("email");
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
+
+  const [passwordMode, setPasswordMode] = useState<PasswordMode>("signin");
+  const [passwordEmail, setPasswordEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [signupSent, setSignupSent] = useState(false);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -27,7 +37,10 @@ export default function LoginPage() {
     setError(null);
     await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: `${window.location.origin}/auth/callback` },
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+        queryParams: { prompt: "select_account" },
+      },
     });
   }
 
@@ -46,7 +59,7 @@ export default function LoginPage() {
       setError("No hemos podido enviar el código. Revisa el email e inténtalo de nuevo.");
       return;
     }
-    setStage("code");
+    setCodeStage("code");
   }
 
   async function verifyCode(e: React.FormEvent) {
@@ -69,6 +82,40 @@ export default function LoginPage() {
     router.refresh();
   }
 
+  async function submitPassword(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    if (passwordMode === "signup") {
+      const { error } = await supabase.auth.signUp({
+        email: passwordEmail,
+        password,
+        options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
+      });
+      setLoading(false);
+      if (error) {
+        setError(error.message);
+        return;
+      }
+      setSignupSent(true);
+      return;
+    }
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email: passwordEmail,
+      password,
+    });
+
+    setLoading(false);
+    if (error) {
+      setError("Email o contraseña incorrectos.");
+      return;
+    }
+    router.push("/");
+    router.refresh();
+  }
+
   return (
     <main className="relative flex min-h-full flex-1 items-center justify-center overflow-hidden px-6 py-10">
       <div
@@ -84,15 +131,18 @@ export default function LoginPage() {
           <div className="space-y-1">
             <h1 className="text-lg font-semibold">Entrar en PM App</h1>
             <p className="text-sm text-muted-foreground">
-              {stage === "email"
-                ? "Sin contraseñas que recordar: te enviamos un código por email."
-                : `Escribe el código de 8 dígitos que hemos enviado a ${email}.`}
+              {method === "code" && codeStage === "email" &&
+                "Sin contraseñas que recordar: te enviamos un código por email."}
+              {method === "code" && codeStage === "code" &&
+                `Escribe el código de 8 dígitos que hemos enviado a ${email}.`}
+              {method === "password" &&
+                (passwordMode === "signin" ? "Entra con tu email y contraseña." : "Crea tu cuenta con email y contraseña.")}
             </p>
           </div>
         </div>
 
         <div className="rounded-2xl border bg-card p-6 shadow-sm space-y-4">
-          {stage === "email" && (
+          {!(method === "code" && codeStage === "code") && (
             <>
               <Button
                 type="button"
@@ -109,7 +159,8 @@ export default function LoginPage() {
               </div>
             </>
           )}
-          {stage === "email" ? (
+
+          {method === "code" && codeStage === "email" && (
             <form onSubmit={requestCode} className="space-y-4">
               <Input
                 type="email"
@@ -124,7 +175,9 @@ export default function LoginPage() {
                 {loading ? "Enviando..." : "Enviar código"}
               </Button>
             </form>
-          ) : (
+          )}
+
+          {method === "code" && codeStage === "code" && (
             <form onSubmit={verifyCode} className="flex flex-col items-center gap-4">
               <InputOTP maxLength={8} value={code} onChange={setCode} autoFocus>
                 <InputOTPGroup>
@@ -145,7 +198,7 @@ export default function LoginPage() {
                 type="button"
                 className="text-xs text-muted-foreground underline underline-offset-2"
                 onClick={() => {
-                  setStage("email");
+                  setCodeStage("email");
                   setCode("");
                   setError(null);
                 }}
@@ -153,6 +206,73 @@ export default function LoginPage() {
                 Usar otro email
               </button>
             </form>
+          )}
+
+          {method === "password" && signupSent && (
+            <p className="text-sm text-muted-foreground">
+              Te hemos enviado un enlace de confirmación a {passwordEmail}.
+              Ábrelo para activar tu cuenta.
+            </p>
+          )}
+
+          {method === "password" && !signupSent && (
+            <form onSubmit={submitPassword} className="space-y-4">
+              <Input
+                type="email"
+                required
+                autoFocus
+                placeholder="tu@email.com"
+                value={passwordEmail}
+                onChange={(e) => setPasswordEmail(e.target.value)}
+              />
+              <Input
+                type="password"
+                required
+                minLength={6}
+                placeholder="Contraseña"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {error && <p className="text-sm text-destructive">{error}</p>}
+              <Button type="submit" className="w-full" disabled={loading}>
+                {loading
+                  ? "Comprobando..."
+                  : passwordMode === "signin"
+                    ? "Entrar"
+                    : "Crear cuenta"}
+              </Button>
+              <div className="flex items-center justify-between text-xs text-muted-foreground">
+                <button
+                  type="button"
+                  className="underline underline-offset-2"
+                  onClick={() => {
+                    setPasswordMode(passwordMode === "signin" ? "signup" : "signin");
+                    setError(null);
+                  }}
+                >
+                  {passwordMode === "signin" ? "Crear cuenta nueva" : "Ya tengo cuenta"}
+                </button>
+                {passwordMode === "signin" && (
+                  <a href="/recuperar" className="underline underline-offset-2">
+                    Olvidé mi contraseña
+                  </a>
+                )}
+              </div>
+            </form>
+          )}
+
+          {!(method === "code" && codeStage === "code") && (
+            <button
+              type="button"
+              className="block w-full text-center text-xs text-muted-foreground underline underline-offset-2"
+              onClick={() => {
+                setMethod(method === "code" ? "password" : "code");
+                setError(null);
+                setSignupSent(false);
+              }}
+            >
+              {method === "code" ? "Prefiero usar una contraseña" : "Prefiero un código por email"}
+            </button>
           )}
         </div>
 
