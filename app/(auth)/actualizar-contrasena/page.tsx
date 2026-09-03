@@ -6,22 +6,51 @@ import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
+type Status = "checking" | "invalid" | "valid";
+
 export default function ActualizarContrasenaPage() {
   const router = useRouter();
   const supabase = createClient();
-  const [ready, setReady] = useState(false);
+  const [status, setStatus] = useState<Status>("checking");
+  const [userEmail, setUserEmail] = useState<string | null>(null);
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
 
   useEffect(() => {
-    const code = new URLSearchParams(window.location.search).get("code");
-    if (!code) {
-      setReady(true);
-      return;
+    async function verify() {
+      const code = new URLSearchParams(window.location.search).get("code");
+
+      // Cierra cualquier sesión que ya hubiera en este navegador antes de
+      // canjear el código, para no arrastrar por error la sesión de otra
+      // cuenta que estuviera abierta.
+      await supabase.auth.signOut();
+
+      if (!code) {
+        setStatus("invalid");
+        return;
+      }
+
+      const { error } = await supabase.auth.exchangeCodeForSession(code);
+      if (error) {
+        setStatus("invalid");
+        return;
+      }
+
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        setStatus("invalid");
+        return;
+      }
+
+      setUserEmail(user.email ?? null);
+      setStatus("valid");
     }
-    supabase.auth.exchangeCodeForSession(code).finally(() => setReady(true));
+    verify();
   }, [supabase]);
 
   async function onSubmit(e: React.FormEvent) {
@@ -53,13 +82,31 @@ export default function ActualizarContrasenaPage() {
           </div>
           <div className="space-y-1">
             <h1 className="text-lg font-semibold">Nueva contraseña</h1>
+            {status === "valid" && userEmail && (
+              <p className="text-sm text-muted-foreground">
+                Vas a cambiar la contraseña de {userEmail}.
+              </p>
+            )}
           </div>
         </div>
 
         <div className="rounded-2xl border bg-card p-6 shadow-sm">
-          {!ready ? (
+          {status === "checking" && (
             <p className="text-sm text-muted-foreground">Comprobando enlace...</p>
-          ) : done ? (
+          )}
+
+          {status === "invalid" && (
+            <div className="space-y-4 text-center">
+              <p className="text-sm text-destructive">
+                Este enlace no es válido o ha caducado.
+              </p>
+              <Button className="w-full" onClick={() => router.push("/recuperar")}>
+                Pedir uno nuevo
+              </Button>
+            </div>
+          )}
+
+          {status === "valid" && done && (
             <div className="space-y-4 text-center">
               <p className="text-sm text-muted-foreground">
                 Contraseña actualizada.
@@ -68,7 +115,9 @@ export default function ActualizarContrasenaPage() {
                 Ir a entrar
               </Button>
             </div>
-          ) : (
+          )}
+
+          {status === "valid" && !done && (
             <form onSubmit={onSubmit} className="space-y-4">
               <Input
                 type="password"
