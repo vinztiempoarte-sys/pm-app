@@ -23,6 +23,14 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  async function signInWithGoogle() {
+    setError(null);
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: `${window.location.origin}/auth/callback` },
+    });
+  }
+
   async function requestCode(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
@@ -83,7 +91,24 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <div className="rounded-2xl border bg-card p-6 shadow-sm">
+        <div className="rounded-2xl border bg-card p-6 shadow-sm space-y-4">
+          {stage === "email" && (
+            <>
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full"
+                onClick={signInWithGoogle}
+              >
+                Continuar con Google
+              </Button>
+              <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                <div className="h-px flex-1 bg-border" />
+                o
+                <div className="h-px flex-1 bg-border" />
+              </div>
+            </>
+          )}
           {stage === "email" ? (
             <form onSubmit={requestCode} className="space-y-4">
               <Input
