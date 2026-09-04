@@ -15,7 +15,7 @@ const SECTIONS = [
   },
   {
     title: "Productos",
-    body: "Tu catálogo de productos FitLine, con la duración media de cada uno (por ejemplo, un bote que dura ~30 días). La app usa ese dato para calcular automáticamente cuándo le tocará recomprar a cada cliente y avisarte.",
+    body: "Tu catálogo de productos FitLine, con la duración media de cada uno (por ejemplo, un bote que dura ~30 días). La app usa ese dato para calcular automáticamente cuándo le tocará recomprar a cada cliente y avisarte. Al registrarte, tu cuenta ya viene con los productos principales de FitLine cargados (Basics, Restorate, Activize Oxyplus, PowerCocktail, Protein y Beauty) para que puedas empezar a registrar ventas desde el primer día — puedes editar, borrar o añadir los que quieras.",
   },
   {
     title: "Equipo",
