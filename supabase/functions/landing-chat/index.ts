@@ -13,6 +13,9 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+const RATE_LIMIT = 20;
+const RATE_LIMIT_WINDOW_SECONDS = 3600;
+
 function systemPrompt(
   distributorName: string | null,
   bio: string | null,
@@ -65,6 +68,23 @@ Deno.serve(async (req) => {
   const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
   const anthropicApiKey = Deno.env.get("ANTHROPIC_API_KEY")!;
   const adminClient = createClient(supabaseUrl, serviceRoleKey);
+
+  const clientIp = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  const { data: allowed } = await adminClient.rpc("check_chat_rate_limit", {
+    p_key: `landing:${slug}:${clientIp}`,
+    p_limit: RATE_LIMIT,
+    p_window_seconds: RATE_LIMIT_WINDOW_SECONDS,
+  });
+
+  if (!allowed) {
+    return new Response(
+      JSON.stringify({
+        reply:
+          "Has hecho muchas preguntas seguidas — dame un momento antes de seguir, o escríbeme directamente por los enlaces de contacto de arriba 🙂",
+      }),
+      { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
+  }
 
   const { data: profile } = await adminClient
     .from("profiles")

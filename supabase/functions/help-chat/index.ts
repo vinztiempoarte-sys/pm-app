@@ -9,6 +9,9 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+const RATE_LIMIT = 30;
+const RATE_LIMIT_WINDOW_SECONDS = 3600;
+
 // Mantener alineado con las secciones de app/(dashboard)/guia/page.tsx
 // cada vez que se añada o cambie una funcionalidad.
 const APP_KNOWLEDGE = `
@@ -69,6 +72,23 @@ Deno.serve(async (req) => {
       status: 401,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
+  }
+
+  const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+  const adminClient = createClient(supabaseUrl, serviceRoleKey);
+  const { data: allowed } = await adminClient.rpc("check_chat_rate_limit", {
+    p_key: `help:${user.id}`,
+    p_limit: RATE_LIMIT,
+    p_window_seconds: RATE_LIMIT_WINDOW_SECONDS,
+  });
+
+  if (!allowed) {
+    return new Response(
+      JSON.stringify({
+        reply: "Has hecho muchas preguntas en poco tiempo — espera un momento antes de seguir 🙂",
+      }),
+      { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
   }
 
   const body = await req.json().catch(() => ({}));
