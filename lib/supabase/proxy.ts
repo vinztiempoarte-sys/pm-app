@@ -56,7 +56,7 @@ export async function updateSession(request: NextRequest) {
   if (user && !isPublicPath && !isBillingPath) {
     const { data: profile } = await supabase
       .from('profiles')
-      .select('subscription_status, trial_ends_at')
+      .select('subscription_status, trial_ends_at, unlimited_access')
       .eq('id', user.id)
       .single()
 
@@ -66,7 +66,7 @@ export async function updateSession(request: NextRequest) {
       !!profile.trial_ends_at &&
       new Date(profile.trial_ends_at) > new Date()
 
-    if (!isActive && !isTrialing) {
+    if (!isActive && !isTrialing && !profile?.unlimited_access) {
       const url = request.nextUrl.clone()
       url.pathname = '/ajustes/facturacion'
       url.searchParams.set('trial_expired', '1')

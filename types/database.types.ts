@@ -138,6 +138,7 @@ export type Profile = {
   current_personal_volume: number | null;
   current_group_volume: number | null;
   subscription_status: string;
+  unlimited_access: boolean;
   mini_landing_slug: string | null;
   mini_landing_bio: string | null;
   brand_color: string | null;
