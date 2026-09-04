@@ -19,60 +19,58 @@ export default async function DashboardLayout({
 
   return (
     <div className="flex min-h-full flex-1 flex-col">
-      <header className="flex items-center justify-between border-b bg-card px-4 py-3">
-        <div className="flex items-center gap-4">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-brand-accent text-[10px] font-bold text-white">
-              PM
-            </span>
-            <span className="text-sm font-semibold">PM App</span>
+      <header className="flex items-center gap-3 border-b bg-card px-4 py-3">
+        <Link href="/" className="flex shrink-0 items-center gap-2">
+          <span className="flex h-6 w-6 items-center justify-center rounded-md bg-brand-accent text-[10px] font-bold text-white">
+            PM
+          </span>
+          <span className="text-sm font-semibold">PM App</span>
+        </Link>
+        <nav className="flex min-w-0 flex-1 gap-3 overflow-x-auto text-sm text-muted-foreground [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <Link href="/" className="shrink-0 whitespace-nowrap hover:text-foreground">
+            Hoy
           </Link>
-          <nav className="flex gap-3 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-foreground">
-              Hoy
-            </Link>
-            <Link href="/contactos" className="hover:text-foreground">
-              Contactos
-            </Link>
-            <Link href="/productos" className="hover:text-foreground">
-              Productos
-            </Link>
-            <Link href="/equipo" className="hover:text-foreground">
-              Equipo
-            </Link>
-            <Link href="/agenda" className="hover:text-foreground">
-              Agenda
-            </Link>
-            <Link href="/plantillas" className="hover:text-foreground">
-              Plantillas
-            </Link>
-            <Link href="/rango" className="hover:text-foreground">
-              Rango
-            </Link>
-            <Link href="/metricas" className="hover:text-foreground">
-              Métricas
-            </Link>
-            <Link href="/mi-pagina" className="hover:text-foreground">
-              Mi página
-            </Link>
-            <Link href="/compliance" className="hover:text-foreground">
-              Compliance
-            </Link>
-            <Link href="/generador" className="hover:text-foreground">
-              Generador
-            </Link>
-            <Link href="/logros" className="hover:text-foreground">
-              Logros
-            </Link>
-            <Link href="/duplicacion" className="hover:text-foreground">
-              Duplicación
-            </Link>
-            <Link href="/guia" className="hover:text-foreground">
-              Guía
-            </Link>
-          </nav>
-        </div>
-        <div className="flex items-center gap-3">
+          <Link href="/contactos" className="shrink-0 whitespace-nowrap hover:text-foreground">
+            Contactos
+          </Link>
+          <Link href="/productos" className="shrink-0 whitespace-nowrap hover:text-foreground">
+            Productos
+          </Link>
+          <Link href="/equipo" className="shrink-0 whitespace-nowrap hover:text-foreground">
+            Equipo
+          </Link>
+          <Link href="/agenda" className="shrink-0 whitespace-nowrap hover:text-foreground">
+            Agenda
+          </Link>
+          <Link href="/plantillas" className="shrink-0 whitespace-nowrap hover:text-foreground">
+            Plantillas
+          </Link>
+          <Link href="/rango" className="shrink-0 whitespace-nowrap hover:text-foreground">
+            Rango
+          </Link>
+          <Link href="/metricas" className="shrink-0 whitespace-nowrap hover:text-foreground">
+            Métricas
+          </Link>
+          <Link href="/mi-pagina" className="shrink-0 whitespace-nowrap hover:text-foreground">
+            Mi página
+          </Link>
+          <Link href="/compliance" className="shrink-0 whitespace-nowrap hover:text-foreground">
+            Compliance
+          </Link>
+          <Link href="/generador" className="shrink-0 whitespace-nowrap hover:text-foreground">
+            Generador
+          </Link>
+          <Link href="/logros" className="shrink-0 whitespace-nowrap hover:text-foreground">
+            Logros
+          </Link>
+          <Link href="/duplicacion" className="shrink-0 whitespace-nowrap hover:text-foreground">
+            Duplicación
+          </Link>
+          <Link href="/guia" className="shrink-0 whitespace-nowrap hover:text-foreground">
+            Guía
+          </Link>
+        </nav>
+        <div className="flex shrink-0 items-center gap-3">
           <Link href="/ajustes" className="text-sm text-muted-foreground hover:text-foreground">
             Ajustes
           </Link>
