@@ -2,14 +2,15 @@ import { createClient } from "@/lib/supabase/server";
 import { TodayList } from "@/components/dashboard/TodayList";
 import { ReorderList, type ReorderSale } from "@/components/dashboard/ReorderList";
 import { PushBanner } from "@/components/dashboard/PushBanner";
+import { ChatAlertsList } from "@/components/dashboard/ChatAlertsList";
 import { todayISODate } from "@/lib/utils/date";
-import type { Contact } from "@/types/database.types";
+import type { ChatAlert, Contact } from "@/types/database.types";
 
 export default async function DashboardHomePage() {
   const supabase = await createClient();
   const today = todayISODate();
 
-  const [{ data: contactsData }, { data: salesData }] = await Promise.all([
+  const [{ data: contactsData }, { data: salesData }, { data: alertsData }] = await Promise.all([
     supabase
       .from("contacts")
       .select("*")
@@ -21,6 +22,11 @@ export default async function DashboardHomePage() {
       .eq("status", "pendiente_recompra")
       .lte("estimated_reorder_date", today)
       .order("estimated_reorder_date", { ascending: true }),
+    supabase
+      .from("chat_alerts")
+      .select("*")
+      .eq("resolved", false)
+      .order("created_at", { ascending: false }),
   ]);
 
   const contacts = (contactsData ?? []) as Contact[];
@@ -42,6 +48,7 @@ export default async function DashboardHomePage() {
         <p className="text-sm text-muted-foreground capitalize">{dateLabel}</p>
       </div>
       <PushBanner />
+      <ChatAlertsList alerts={(alertsData ?? []) as ChatAlert[]} />
       <ReorderList sales={(salesData ?? []) as ReorderSale[]} />
       <TodayList overdue={overdue} today={dueToday} />
     </div>

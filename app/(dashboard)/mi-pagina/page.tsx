@@ -2,7 +2,8 @@ import { createClient } from "@/lib/supabase/server";
 import { MiPaginaForm } from "@/components/mini-landing/MiPaginaForm";
 import { LinksManager } from "@/components/mini-landing/LinksManager";
 import { QrCode } from "@/components/mini-landing/QrCode";
-import type { MiniLandingLink, Profile } from "@/types/database.types";
+import { ChatKnowledgeManager } from "@/components/mini-landing/ChatKnowledgeManager";
+import type { ChatKnowledge, MiniLandingLink, Profile } from "@/types/database.types";
 
 export default async function MiPaginaPage() {
   const supabase = await createClient();
@@ -24,6 +25,12 @@ export default async function MiPaginaPage() {
     .eq("profile_id", user!.id)
     .order("position", { ascending: true });
 
+  const { data: knowledge } = await supabase
+    .from("chat_knowledge")
+    .select("*")
+    .eq("owner_id", user!.id)
+    .order("created_at", { ascending: false });
+
   return (
     <div className="mx-auto w-full max-w-md flex-1 space-y-6">
       <div className="space-y-1">
@@ -41,6 +48,11 @@ export default async function MiPaginaPage() {
       <LinksManager
         profileId={user!.id}
         links={(links ?? []) as MiniLandingLink[]}
+      />
+
+      <ChatKnowledgeManager
+        profileId={user!.id}
+        knowledge={(knowledge ?? []) as ChatKnowledge[]}
       />
     </div>
   );

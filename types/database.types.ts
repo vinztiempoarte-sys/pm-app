@@ -164,3 +164,20 @@ export type PushSubscriptionRow = {
   auth: string;
   created_at: string;
 };
+
+export type ChatKnowledge = {
+  id: string;
+  owner_id: string;
+  topic: string;
+  answer: string;
+  created_at: string;
+};
+
+export type ChatAlert = {
+  id: string;
+  owner_id: string;
+  question: string;
+  bot_reply: string;
+  resolved: boolean;
+  created_at: string;
+};

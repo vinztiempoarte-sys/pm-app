@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getYoutubeEmbedUrl } from "@/lib/youtube";
 import { LeadForm } from "@/components/mini-landing/LeadForm";
+import { LandingChat } from "@/components/chat/LandingChat";
 
 type LandingData = {
   full_name: string | null;
@@ -89,6 +90,8 @@ export default async function MiniLandingPage({
           </p>
         )}
       </div>
+
+      <LandingChat slug={slug} accent={accent} />
 
       <LeadForm slug={slug} accent={accent} />
     </div>

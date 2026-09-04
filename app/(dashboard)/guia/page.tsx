@@ -1,3 +1,5 @@
+import { HelpChat } from "@/components/chat/HelpChat";
+
 const SECTIONS = [
   {
     title: "Entrar en la app",
@@ -5,7 +7,7 @@ const SECTIONS = [
   },
   {
     title: "Hoy",
-    body: "Tu resumen diario. Aquí aparecen los contactos a los que tienes que escribir hoy: un seguimiento pendiente, una recompra a punto de caducar o una cita en la agenda. Es la pantalla con la que empezar cada día.",
+    body: "Tu resumen diario. Aquí aparecen los contactos a los que tienes que escribir hoy: un seguimiento pendiente, una recompra a punto de caducar o una cita en la agenda. También aparecen aquí, si las hay, las preguntas que el chatbot de tu página no supo responder con seguridad y necesita que contestes tú en persona. Es la pantalla con la que empezar cada día.",
   },
   {
     title: "Contactos",
@@ -37,7 +39,7 @@ const SECTIONS = [
   },
   {
     title: "Mi página",
-    body: "Tu tarjeta digital pública — sustituye a un Linktree genérico. Es una página con tu foto, una frase de presentación, un vídeo opcional y botones a tus canales (WhatsApp, Instagram, catálogo...), todo con tu propia marca. Compártela como enlace único en tus redes, o con el código QR descargable, listo para tarjetas o eventos presenciales. Además tiene un formulario de contacto: cuando alguien lo rellena, se crea automáticamente como nuevo prospecto en tu lista de Contactos, sin que tengas que hacer nada. Cada clic en un enlace queda contado, para que sepas qué canal funciona mejor.",
+    body: "Tu tarjeta digital pública — sustituye a un Linktree genérico. Es una página con tu foto, una frase de presentación, un vídeo opcional y botones a tus canales (WhatsApp, Instagram, catálogo...), todo con tu propia marca. Compártela como enlace único en tus redes, o con el código QR descargable, listo para tarjetas o eventos presenciales. Además tiene un chatbot que responde dudas de tus visitantes al momento, y un formulario de contacto: cuando alguien lo rellena, se crea automáticamente como nuevo prospecto en tu lista de Contactos, sin que tengas que hacer nada. Cada clic en un enlace queda contado, para que sepas qué canal funciona mejor. Al final de esta misma página puedes 'entrenar' tu chatbot: añade temas y respuestas propias (precios de envío en tu zona, horarios, promociones locales...) y el bot los usará al responder. Si una pregunta es demasiado específica o el bot no está seguro, no se inventa nada: te lo deja como aviso en tu pantalla de Hoy para que respondas tú en persona, y te llega una notificación si las tienes activadas.",
   },
   {
     title: "Compliance",
@@ -95,6 +97,8 @@ export default function GuiaPage() {
           </details>
         ))}
       </div>
+
+      <HelpChat />
     </div>
   );
 }
