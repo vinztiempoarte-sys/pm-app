@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { SignOutButton } from "@/components/shared/SignOutButton";
+import { AccountMenu } from "@/components/shared/AccountMenu";
 
 export default async function DashboardLayout({
   children,
@@ -20,12 +20,7 @@ export default async function DashboardLayout({
   return (
     <div className="flex min-h-full flex-1 flex-col">
       <header className="flex items-center gap-3 border-b bg-card px-4 py-3">
-        <Link href="/" className="flex shrink-0 items-center gap-2">
-          <span className="flex h-6 w-6 items-center justify-center rounded-md bg-brand-accent text-[10px] font-bold text-white">
-            PM
-          </span>
-          <span className="text-sm font-semibold">PM App</span>
-        </Link>
+        <AccountMenu />
         <nav className="flex min-w-0 flex-1 gap-3 overflow-x-auto text-sm text-muted-foreground [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <Link href="/" className="shrink-0 whitespace-nowrap hover:text-foreground">
             Hoy
@@ -70,12 +65,6 @@ export default async function DashboardLayout({
             Guía
           </Link>
         </nav>
-        <div className="flex shrink-0 items-center gap-3">
-          <Link href="/ajustes" className="text-sm text-muted-foreground hover:text-foreground">
-            Ajustes
-          </Link>
-          <SignOutButton />
-        </div>
       </header>
       <main className="flex flex-1 flex-col p-4">{children}</main>
     </div>
